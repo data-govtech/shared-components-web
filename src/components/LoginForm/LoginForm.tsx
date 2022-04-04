@@ -15,6 +15,11 @@ export const LoginForm = memo<Props>(({ authApiUrl, contactUsComponent, onSucces
   const [step, setStep] = useState(1);
   const [email, setEmail] = useState('');
 
+  const resetState = useCallback(() => {
+    setStep(1);
+    setEmail('');
+  }, []);
+
   const handleSubmitEmail = useCallback(
     async (email: string) => {
       toggleLoading(true);
@@ -40,9 +45,12 @@ export const LoginForm = memo<Props>(({ authApiUrl, contactUsComponent, onSucces
       toggleLoading(false);
       if (!resp) return;
 
-      if (resp.jwt) onSuccess?.(resp);
+      if (resp.jwt) {
+        onSuccess?.(resp);
+        resetState();
+      }
     },
-    [authApiUrl, email, onSuccess]
+    [authApiUrl, email, onSuccess, resetState]
   );
 
   return (

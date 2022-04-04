@@ -8,12 +8,13 @@ interface HeaderProps {
   authApiUrl: string;
   children: React.ReactElement;
   userInfo: UserInfo | null;
+  contactUsComponent?: React.ReactElement;
   onUserInfoLoaded?(payload: any): void;
   onError?(e: any): void;
 }
 
 export const Profile = memo<HeaderProps>(
-  ({ authApiUrl, children, userInfo, onUserInfoLoaded, onError }) => {
+  ({ authApiUrl, children, userInfo, contactUsComponent, onUserInfoLoaded, onError }) => {
     const [loading, toggleLoading] = useState(false);
 
     const handleLoginSuccess = useCallback(
@@ -53,7 +54,11 @@ export const Profile = memo<HeaderProps>(
     return userInfo?.email ? (
       children
     ) : (
-      <LoginModal authApiUrl={authApiUrl} onLoginSuccess={handleLoginSuccess} />
+      <LoginModal
+        authApiUrl={authApiUrl}
+        onLoginSuccess={handleLoginSuccess}
+        contactUsComponent={contactUsComponent}
+      />
     );
   }
 );

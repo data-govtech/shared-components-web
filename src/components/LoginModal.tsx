@@ -44,6 +44,7 @@ export const LoginModal = memo<Props>(({ authApiUrl, contactUsComponent, onLogin
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
+        destroyOnClose
       >
         <LoginForm
           authApiUrl={authApiUrl}

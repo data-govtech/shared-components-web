@@ -50,8 +50,6 @@ export async function getUserInfo(authApiUrl: string, signalToAbort?: AbortSigna
 
     return resp;
   } catch (err: any) {
-    notify.error(err.message);
-
     return null;
   }
 }
