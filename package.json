@@ -1,0 +1,75 @@
+{
+  "name": "dsaid-common",
+  "version": "0.0.18",
+  "dependencies": {
+    "@ant-design/icons": "^4.6.4",
+    "antd": "^4.18.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.1",
+    "typescript": "^4.4.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "typings": "dist/index.d.ts",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "build-package": "rollup -c",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.2",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-typescript": "^8.3.1",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.4.0",
+    "@types/react-dom": "^16.4.0",
+    "@types/styled-components": "^5.1.24",
+    "cross-env": "^7.0.3",
+    "jest-styled-components": "^7.0.3",
+    "react-scripts": "^5.0.0",
+    "rollup": "^2.70.1",
+    "rollup-plugin-dts": "^4.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-terser": "^7.0.2",
+    "unused-files-webpack-plugin": "^3.4.0",
+    "webpack-bundle-analyzer": "^4.4.2"
+  },
+  "sideEffects": false,
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false
+      }
+    ]
+  ]
+}

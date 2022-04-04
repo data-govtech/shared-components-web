@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@app/*": ["app/*"],
+      "@uikits": ["components/UIKits.tsx"],
+      "@components/*": ["components/*"],
+      "@icons": ["components/Icons.tsx"],
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"]
+    }
+  }
+}
