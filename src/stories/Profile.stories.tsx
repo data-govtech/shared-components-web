@@ -5,6 +5,7 @@ import { Button, Dropdown, Menu } from 'antd';
 import AppstoreOutlined from '@ant-design/icons/lib/icons/AppstoreOutlined';
 import LogoutOutlined from '@ant-design/icons/lib/icons/LogoutOutlined';
 import UserOutlined from '@ant-design/icons/lib/icons/UserOutlined';
+import LoginOutlined from '@ant-design/icons/LoginOutlined';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { Profile as ProfileCmp } from '../components/Profile';
@@ -78,4 +79,12 @@ ProfileNormalHasContactLink.args = {
   children: null,
   userInfo: null,
   contactUsComponent: <a>Contact us</a>,
+};
+
+export const ProfileCustomLoginButton = Template.bind({});
+ProfileCustomLoginButton.args = {
+  authApiUrl: '',
+  children: null,
+  userInfo: null,
+  loginBtn: <Button icon={<LoginOutlined />} size="small" />,
 };

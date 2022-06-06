@@ -11,10 +11,11 @@ interface HeaderProps {
   contactUsComponent?: React.ReactElement;
   onUserInfoLoaded?(payload: any): void;
   onError?(e: any): void;
+  loginBtn?: React.ReactElement;
 }
 
 export const Profile = memo<HeaderProps>(
-  ({ authApiUrl, children, userInfo, contactUsComponent, onUserInfoLoaded, onError }) => {
+  ({ authApiUrl, children, userInfo, contactUsComponent, loginBtn, onUserInfoLoaded, onError }) => {
     const [loading, toggleLoading] = useState(false);
 
     const handleLoginSuccess = useCallback(
@@ -58,6 +59,7 @@ export const Profile = memo<HeaderProps>(
         authApiUrl={authApiUrl}
         onLoginSuccess={handleLoginSuccess}
         contactUsComponent={contactUsComponent}
+        loginBtn={loginBtn}
       />
     );
   }
