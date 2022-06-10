@@ -1,0 +1,61 @@
+name: Release Flow
+
+on:
+  workflow_call:
+    inputs:
+      version_type:
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      VERSION_TYPE: ${{ inputs.version_type }}
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: release
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Config Git
+        run: |
+          git config user.email "${{ github.event.head_commit.committer.email }}"
+          git config user.name "${{ github.event.head_commit.committer.name }}"
+
+      - name: Bump version
+        run: npm version --git-tag-version=false ${{ env.VERSION_TYPE }}
+
+      - name: Extract version from updated package.json
+        id: extract_version
+        uses: Saionaro/extract-package-version@v1.0.6
+
+      - name: Dev Only
+        run: |
+          date > generated.txt
+
+      - name: Install dependencies and generate build
+        run: |
+          yarn install
+          yarn build
+
+      - name: Commit build
+        run: |
+          git add .
+          git commit -m "Build for release v${{ steps.extract_version.outputs.version }}. Bump version v${{ steps.extract_version.outputs.version }}"
+
+      - name: Push build to origin
+        run: git push
+
+      - name: Add Tag
+        run: |
+          git tag v${{ steps.extract_version.outputs.version }} -m "Bump version v${{ steps.extract_version.outputs.version }}"
+          git push origin --tags

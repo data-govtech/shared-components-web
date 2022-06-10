@@ -1,0 +1,26 @@
+name: Generate build
+
+on:
+  push:
+    branches: ['release']
+
+  workflow_dispatch:
+
+jobs:
+  call-release-patch:
+    uses: ./.github/workflows/release.yml
+    if: ${{ contains(github.event.head_commit.message, 'patch') }}
+    with:
+      version_type: patch
+
+  call-release-minor:
+    uses: ./.github/workflows/release.yml
+    if: ${{ contains(github.event.head_commit.message, 'minor') }}
+    with:
+      version_type: minor
+
+  call-release-major:
+    uses: ./.github/workflows/release.yml
+    if: ${{ contains(github.event.head_commit.message, 'major') }}
+    with:
+      version_type: major

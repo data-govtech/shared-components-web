@@ -1,0 +1,13 @@
+name: Event Loggger
+on:
+  push:
+    branches: ['release']
+
+jobs:
+  log-github-event-goodies:
+    name: 'LOG Everything on GitHub Event'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Logging
+        run: |
+          echo "TOKEN:: ${{toJSON(github)}}"
