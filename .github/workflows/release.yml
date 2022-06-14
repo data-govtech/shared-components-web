@@ -38,10 +38,6 @@ jobs:
         id: extract_version
         uses: Saionaro/extract-package-version@v1.0.6
 
-      - name: Dev Only
-        run: |
-          date > generated.txt
-
       - name: Install dependencies and generate build
         run: |
           yarn install
@@ -59,3 +55,11 @@ jobs:
         run: |
           git tag v${{ steps.extract_version.outputs.version }} -m "Bump version v${{ steps.extract_version.outputs.version }}"
           git push origin --tags
+
+      - name: Create Release Notes
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: '${{ github.api_url}}/repos/${{ github.repository }}/releases'
+          method: 'POST'
+          customHeaders: '{ "Content-Type": "application/json", "Authorization": "token ${{ github.token }}" }'
+          data: '{ "tag_name": "v${{ steps.extract_version.outputs.version }}", "name": "Release v${{ steps.extract_version.outputs.version }}", "target_commitish": "release" }'
