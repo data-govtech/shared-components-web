@@ -56,3 +56,4 @@ declare function logout(): void;
 declare function getUserInfo(authApiUrl: string, signalToAbort?: AbortSignal): Promise<any>;
 
 export { BetaTag, LoginForm, LoginModal, Profile, apiHelpers, getToken, getUserInfo, login, logout, notify };
+//# sourceMappingURL=index.d.ts.map
