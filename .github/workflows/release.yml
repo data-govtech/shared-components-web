@@ -45,6 +45,7 @@ jobs:
 
       - name: Commit build
         run: |
+          git fetch
           git checkout prod
           git add dist
           git commit -m "Build for release v${{ steps.extract_version.outputs.version }}. Bump version v${{ steps.extract_version.outputs.version }}"
