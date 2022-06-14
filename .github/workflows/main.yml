@@ -2,9 +2,9 @@ name: Generate build
 
 on:
   push:
-    branches: ['release']
-
-  workflow_dispatch:
+    branches: ['main']
+  pull_request:
+    branches: ['develop']
 
 jobs:
   call-release-patch:
