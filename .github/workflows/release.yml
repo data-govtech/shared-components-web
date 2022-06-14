@@ -45,9 +45,12 @@ jobs:
 
       - name: Commit build
         run: |
-          git fetch
-          git checkout prod
-          git add dist
+          git fetch origin
+          git stash save
+          git checkout prod -f
+          git stash apply 0
+          git stash clear
+          git add .
           git commit -m "Build for release v${{ steps.extract_version.outputs.version }}. Bump version v${{ steps.extract_version.outputs.version }}"
 
       - name: Push build to origin
