@@ -45,7 +45,8 @@ jobs:
 
       - name: Commit build
         run: |
-          git add .
+          git checkout prod
+          git add dist
           git commit -m "Build for release v${{ steps.extract_version.outputs.version }}. Bump version v${{ steps.extract_version.outputs.version }}"
 
       - name: Push build to origin
@@ -62,4 +63,4 @@ jobs:
           url: '${{ github.api_url}}/repos/${{ github.repository }}/releases'
           method: 'POST'
           customHeaders: '{ "Content-Type": "application/json", "Authorization": "token ${{ github.token }}" }'
-          data: '{ "tag_name": "v${{ steps.extract_version.outputs.version }}", "name": "Release v${{ steps.extract_version.outputs.version }}", "target_commitish": "release" }'
+          data: '{ "tag_name": "v${{ steps.extract_version.outputs.version }}", "name": "Release v${{ steps.extract_version.outputs.version }}", "target_commitish": "prod" }'
