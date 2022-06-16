@@ -46,8 +46,8 @@ export const LoginForm = memo<Props>(({ authApiUrl, contactUsComponent, onSucces
       if (!resp) return;
 
       if (resp.jwt) {
-        onSuccess?.(resp);
         resetState();
+        onSuccess?.(resp);
       }
     },
     [authApiUrl, email, onSuccess, resetState]
