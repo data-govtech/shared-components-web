@@ -74,8 +74,11 @@ jobs:
       - name: Generate build and commit built folder on branch release
         id: gen-build
         run: |
+          cp -R dist temp
           git fetch origin
           git checkout release
+          rm -rf dist
+          mv temp dist
           git add dist/
           git commit -m "Generate build for release ${{ needs.bump-version.outputs.build-version }}"
           echo "::set-output name=latest-commit::$(git rev-parse HEAD)"

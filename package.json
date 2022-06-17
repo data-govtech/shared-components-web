@@ -88,5 +88,12 @@
         "modules": false
       }
     ]
-  ]
+  ],
+  "publishConfig": {
+    "@data-govtech:registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/data-govtech/shared-components-web.git"
+  }
 }
