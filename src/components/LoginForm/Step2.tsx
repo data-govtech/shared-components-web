@@ -1,4 +1,4 @@
-import { FormInstance } from 'antd/lib/form';
+import { useForm } from 'antd/lib/form/Form';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { getOTP } from '../../services/auth';
@@ -20,6 +20,7 @@ const DEFAULT_VALUES = {
 };
 
 export const Step2 = memo<StepProps>(({ authApiUrl, loading, email, onSubmit }) => {
+  const [form] = useForm<FormValues>();
   const [resending, toggleResend] = useState(false);
   const [resendStatus, setResendStatus] = useState('');
 
@@ -56,7 +57,7 @@ export const Step2 = memo<StepProps>(({ authApiUrl, loading, email, onSubmit }) 
   }, [resending, resendStatus]);
 
   return (
-    <Form onFinish={handleSubmit} layout="vertical" initialValues={DEFAULT_VALUES}>
+    <Form form={form} onFinish={handleSubmit} layout="vertical" initialValues={DEFAULT_VALUES}>
       <Typography.Text type="secondary">
         An OTP has been emailed to you. Enter OTP below.
       </Typography.Text>
@@ -72,16 +73,9 @@ export const Step2 = memo<StepProps>(({ authApiUrl, loading, email, onSubmit }) 
             prevValues.otp !== curValues.otp
           }
         >
-          {(form: FormInstance<FormValues>) => (
-            <Button
-              type="primary"
-              htmlType="submit"
-              loading={loading}
-              disabled={!form.getFieldValue('otp')}
-            >
-              Login
-            </Button>
-          )}
+          <Button type="primary" htmlType="submit" loading={loading}>
+            Login
+          </Button>
         </Form.Item>
         {resendStatus ? (
           <Typography.Text type="success">{resendStatus}</Typography.Text>
