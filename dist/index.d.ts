@@ -32,10 +32,10 @@ declare const LoginForm: React$1.NamedExoticComponent<Props>;
 declare const BetaTag: React$1.NamedExoticComponent<object>;
 
 declare const notify: {
-    error(message: string): void;
-    success({ message, title }: {
-        message: string;
-        title?: string | undefined;
+    error(message: React__default.ReactNode | string): void;
+    success({ message, title, }: {
+        message: React__default.ReactNode | string;
+        title?: React__default.ReactNode;
     }): void;
 };
 
