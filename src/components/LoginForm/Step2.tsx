@@ -1,12 +1,5 @@
 import { FormInstance } from 'antd/lib/form';
-import React, {
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState
-} from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { getOTP } from '../../services/auth';
 import { Button, Form, Input, Space, Typography } from '../UIKits';

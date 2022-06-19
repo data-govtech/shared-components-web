@@ -15,12 +15,18 @@ const config = [
       {
         file: packageJson.main,
         format: 'cjs',
-        sourcemap: true,
+        sourcemap: false,
+        globals: {
+          react: 'React',
+        },
       },
       {
         file: packageJson.module,
         format: 'esm',
-        sourcemap: true,
+        sourcemap: false,
+        globals: {
+          react: 'React',
+        },
       },
     ],
     plugins: [
