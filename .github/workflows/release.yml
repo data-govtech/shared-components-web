@@ -56,7 +56,7 @@ jobs:
         with:
           ref: develop
 
-      - name: Bump version on branch develop
+      - name: Bump version on branch develop for the release
         run: |
           git config user.email "${{ github.event.head_commit.committer.email }}"
           git config user.name "${{ github.event.head_commit.committer.name }}"
@@ -72,7 +72,6 @@ jobs:
           yarn build
 
       - name: Generate build and commit built folder on branch release
-        id: gen-build
         run: |
           cp -R dist temp
           git fetch origin
@@ -81,13 +80,14 @@ jobs:
           mv temp dist
           git add dist/
           git commit -m "Generate build for release ${{ needs.bump-version.outputs.build-version }}"
-          echo "::set-output name=latest-commit::$(git rev-parse HEAD)"
 
       - name: Bump version on branch release
+        id: version-commit
         run: |
           npm version --git-tag-version=false ${{ needs.bump-version.outputs.next-version-number }}
           git add package.json
           git commit -m "Bump version v${{ needs.bump-version.outputs.next-version-number }}"
+          echo "::set-output name=latest-commit::$(git rev-parse HEAD)"
 
       - name: Push changes
         run: git push
@@ -98,4 +98,4 @@ jobs:
           url: '${{ github.api_url}}/repos/${{ github.repository }}/releases'
           method: 'POST'
           customHeaders: '{ "Content-Type": "application/json", "Authorization": "token ${{ github.token }}" }'
-          data: '{ "tag_name": "${{ needs.bump-version.outputs.build-version }}", "name": "Release ${{ needs.bump-version.outputs.build-version }}", "target_commitish": "${{ steps.gen-build.outputs.latest-commit }}" }'
+          data: '{ "tag_name": "${{ needs.bump-version.outputs.next-version-number }}", "name": "Release ${{ needs.bump-version.outputs.next-version-number }}", "target_commitish": "${{ steps.version-commit.outputs.latest-commit }}" }'
