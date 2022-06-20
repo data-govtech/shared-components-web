@@ -29,3 +29,5 @@ export {
   Menu,
   Dropdown,
 } from 'antd';
+
+export { useForm } from 'antd/lib/form/Form';
