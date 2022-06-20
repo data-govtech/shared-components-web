@@ -12,7 +12,6 @@ export {
   List,
   message as antdMessage,
   Modal,
-  Popconfirm,
   Radio,
   Row,
   Select,
@@ -31,3 +30,4 @@ export {
 } from 'antd';
 
 export { useForm } from 'antd/lib/form/Form';
+export { Popconfirm } from './Popconfirm';
