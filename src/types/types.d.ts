@@ -36,3 +36,5 @@ type FetchDecodeJwtResp = {
   iat: number;
   jti: string;
 };
+
+type Nullable<T> = T | null;

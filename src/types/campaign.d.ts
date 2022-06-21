@@ -27,3 +27,18 @@ type Campaign = {
   tasks?: Task[];
   opt_out_emails?: string;
 };
+
+type Task = {
+  campaign_id: string;
+  created_at: string;
+  email_list_status: EmailStatus[];
+  mail_date: string;
+  task_group: string;
+  task_group_status: TaskGroupStatusEnum;
+  task_status_remark?: string;
+  task_status_name: string;
+  updated_at: string;
+  email_count: number;
+  emails_in_queue: string[];
+  triggered_at?: string;
+};
