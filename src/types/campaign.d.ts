@@ -28,6 +28,16 @@ type Campaign = {
   opt_out_emails?: string;
 };
 
+type EmailStatus = {
+  task_id: string;
+  task_status_name: TaskStatusEnum;
+  task_status_remark: string;
+  to_emails: string[];
+  updated_at: string;
+  // for client
+  email?: string;
+};
+
 type Task = {
   campaign_id: string;
   created_at: string;
