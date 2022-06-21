@@ -68,7 +68,7 @@ jobs:
 
       - name: Install dependencies and generate build
         run: |
-          yarn install
+          yarn install --frozen-lockfile
           yarn build
 
       - name: Generate build and commit built folder on branch release
@@ -79,7 +79,7 @@ jobs:
           rm -rf dist
           mv temp dist
           git add dist/
-          git commit -m "Generate build for release ${{ needs.bump-version.outputs.build-version }}"
+          git commit -m "Generate build for release ${{ needs.bump-version.outputs.next-version-number }}"
 
       - name: Bump version on branch release
         id: version-commit

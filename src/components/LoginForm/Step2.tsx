@@ -1,8 +1,7 @@
-import { FormInstance } from 'antd/lib/form';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { getOTP } from '../../services/auth';
-import { Button, Form, Input, Space, Typography } from '../UIKits';
+import { Button, Form, Input, Space, Typography, useForm } from '../UIKits';
 
 interface StepProps {
   authApiUrl: string;
@@ -20,6 +19,7 @@ const DEFAULT_VALUES = {
 };
 
 export const Step2 = memo<StepProps>(({ authApiUrl, loading, email, onSubmit }) => {
+  const [form] = useForm<FormValues>();
   const [resending, toggleResend] = useState(false);
   const [resendStatus, setResendStatus] = useState('');
 
@@ -72,16 +72,9 @@ export const Step2 = memo<StepProps>(({ authApiUrl, loading, email, onSubmit }) 
             prevValues.otp !== curValues.otp
           }
         >
-          {(form: FormInstance<FormValues>) => (
-            <Button
-              type="primary"
-              htmlType="submit"
-              loading={loading}
-              disabled={!form.getFieldValue('otp')}
-            >
-              Login
-            </Button>
-          )}
+          <Button type="primary" htmlType="submit" loading={loading}>
+            Login
+          </Button>
         </Form.Item>
         {resendStatus ? (
           <Typography.Text type="success">{resendStatus}</Typography.Text>

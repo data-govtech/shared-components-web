@@ -1,8 +1,7 @@
-import { FormInstance } from 'antd';
 import { memo, useCallback } from 'react';
 import styled from 'styled-components';
 
-import { Button, Form, Input, Typography } from '../UIKits';
+import { Button, Form, Input, Typography, useForm } from '../UIKits';
 
 const ActionStyle = styled.div`
   display: flex;
@@ -27,6 +26,7 @@ type FormValues = {
 const DEFAULT_VALUES = { email: '' };
 
 export const Step1 = memo<StepProps>(({ loading, contactUsComponent, onSubmit }) => {
+  const [form] = useForm<FormValues>();
   const handleSubmit = useCallback(
     (values: FormValues) => {
       onSubmit?.(values.email);
@@ -35,7 +35,7 @@ export const Step1 = memo<StepProps>(({ loading, contactUsComponent, onSubmit })
   );
 
   return (
-    <Form onFinish={handleSubmit} layout="vertical" initialValues={DEFAULT_VALUES}>
+    <Form form={form} onFinish={handleSubmit} layout="vertical" initialValues={DEFAULT_VALUES}>
       <Typography>
         Enter your Email Addess and we will send you One-Time Password (OTP) to enter below.
       </Typography>
@@ -47,22 +47,15 @@ export const Step1 = memo<StepProps>(({ loading, contactUsComponent, onSubmit })
           prevValues.email !== curValues.email
         }
       >
-        {(form: FormInstance<FormValues>) => (
-          <ActionStyle>
-            <Button
-              type="primary"
-              htmlType="submit"
-              loading={loading}
-              disabled={!form.getFieldValue('email')}
-            >
-              Get OTP
-            </Button>
-            <RightAction>
-              <Typography>Not a registered user yet?</Typography>
-              {contactUsComponent}
-            </RightAction>
-          </ActionStyle>
-        )}
+        <ActionStyle>
+          <Button type="primary" htmlType="submit" loading={loading}>
+            Get OTP
+          </Button>
+          <RightAction>
+            <Typography>Not a registered user yet?</Typography>
+            {contactUsComponent}
+          </RightAction>
+        </ActionStyle>
       </Form.Item>
     </Form>
   );
