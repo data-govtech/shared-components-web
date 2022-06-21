@@ -1,6 +1,6 @@
 {
   "name": "@dsaid/common",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "dependencies": {
     "@ant-design/icons": "^4.6.4",
     "antd": "^4.18.0",
