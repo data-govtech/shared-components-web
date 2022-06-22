@@ -79,7 +79,7 @@ jobs:
           rm -rf dist
           mv temp dist
           git add dist/
-          git commit -m "Generate build for release ${{ needs.bump-version.outputs.next-version-number }}"
+          git commit -m "Generate build for release v${{ needs.bump-version.outputs.next-version-number }}"
 
       - name: Bump version on branch release
         id: version-commit
@@ -98,4 +98,4 @@ jobs:
           url: '${{ github.api_url}}/repos/${{ github.repository }}/releases'
           method: 'POST'
           customHeaders: '{ "Content-Type": "application/json", "Authorization": "token ${{ github.token }}" }'
-          data: '{ "tag_name": "${{ needs.bump-version.outputs.next-version-number }}", "name": "Release ${{ needs.bump-version.outputs.next-version-number }}", "target_commitish": "${{ steps.version-commit.outputs.latest-commit }}" }'
+          data: '{ "tag_name": "v${{ needs.bump-version.outputs.next-version-number }}", "name": "Release ${{ needs.bump-version.outputs.next-version-number }}", "target_commitish": "${{ steps.version-commit.outputs.latest-commit }}" }'
